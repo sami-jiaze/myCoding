@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+  <ul id="ul">
+
+  </ul>
+  <script type="text/javascript">
+    const _createPage = (allItem, pageItem) => {
+      // 补全代码
+      let ul = document.querySelector('#ul')
+      let num = Math.ceil(allItem / pageItem)
+      for (let i = 0; i < num; i++) {
+        let li = document.createElement('li')
+        li.innerHTML = i+1
+        ul.appendChild(li)
+      }
+    }
+
+    // test
+    function test() {
+      _createPage(13, 2)
+      let ul = document.querySelector('#ul')
+      return ul.children.length === 7 && ul.children[6].innerText === '7'
+    }
+    console.log(test());
+  </script>
+</body>
+
+</html>
