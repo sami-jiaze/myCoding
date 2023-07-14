@@ -3,9 +3,13 @@
 // 1. 请勿直接使用for/while
 const _createArray = number => {
   // 补全代码
-  let arr = new Array(number);
+  let arr = new Array(number)
   arr.fill(number)
   return arr
 }
 
-console.log(_createArray(5));
+// test
+function test() {
+  return JSON.stringify(_createArray(3)) === '[3,3,3]' && !_createArray.toString().includes('for') && !_createArray.toString().includes('while')
+}
+console.log(_createArray(5))

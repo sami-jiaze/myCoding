@@ -17,4 +17,8 @@ function _comma(number) {
   return str
 }
 
+// test
+function test() {
+  return _comma(1234567) === '1,234,567'
+}
 console.log(_comma(2514465))
