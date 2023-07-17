@@ -1,0 +1,91 @@
+<!-- 请补全JavaScript代码，要求如下：
+1. 当点击"-"按钮时，商品数量减1
+2. 当点击"+"按钮时，商品数量加1
+3. 每当点击任意按钮时，购物面板中相关信息必须同步更新
+注意：
+1. 必须使用DOM0级标准事件（onclick） -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+  <table>
+    <thead>
+      <caption>
+        商品
+      </caption>
+    </thead>
+    <tbody>
+      <tr>
+        <td>炸鸡</td>
+        <td>28元</td>
+        <td><button id="zjtaiduola">-</button></td>
+        <td><span id="zjsl">0</span></td>
+        <td><button id="zjtaishaola">+</button></td>
+      </tr>
+      <tr>
+        <td>可乐</td>
+        <td>5元</td>
+        <td><button id="kltaiduola">-</button></td>
+        <td><span id="klsl">0</span></td>
+        <td><button id="kltaishaola">+</button></td>
+      </tr>
+      <tr>
+        <td>总价：</td>
+        <td><span id="total">0</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script type="text/javascript">
+    // 补全代码
+    let total_zjsl = 0
+    let total_klsl = 0
+
+    let dom_zjtaiduola = document.querySelector('#zjtaiduola')
+    let dom_zjsl = document.querySelector('#zjsl')
+    let dom_zjtaishaola = document.querySelector('#zjtaishaola')
+    let dom_kltaiduola = document.querySelector('#kltaiduola')
+    let dom_klsl = document.querySelector('#klsl')
+    let dom_kltaishaola = document.querySelector('#kltaishaola')
+    let dom_total = document.querySelector('#total')
+
+    dom_zjtaiduola.onclick = function () {
+      if (total_zjsl > 0) total_zjsl--
+      redraw()
+    }
+    dom_zjtaishaola.onclick = function () {
+      total_zjsl++
+      redraw()
+    }
+
+    dom_kltaiduola.onclick = function () {
+      if (total_klsl > 0) total_klsl--
+      redraw()
+    }
+    dom_kltaishaola.onclick = function () {
+      total_klsl++
+      redraw()
+    }
+
+    function redraw() {
+      dom_zjsl.innerHTML = total_zjsl
+      dom_klsl.innerHTML = total_klsl
+      dom_total.innerHTML = total_klsl * 5 + total_zjsl * 28
+    }
+
+    // test
+    function test() {
+      document.querySelector('#zjtaishaola').click();
+      document.querySelector('#kltaishaola').click();
+      return document.querySelector('#total').innerText === '33'
+    }
+    console.log(test());
+  </script>
+</body>
+
+</html>
