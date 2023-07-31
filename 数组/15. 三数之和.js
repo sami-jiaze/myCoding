@@ -16,26 +16,21 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  let res = []
-  let len = nums.length
   nums.sort((a, b) => a - b)
-
-  for (let i = 0; i < len; i++) {
+  let fin = []
+  for (let i = 0; i < nums.length; i++) {
     let left = i + 1
-    let right = len - 1
-    let inum = nums[i]
-    if (inum > 0) return res
-    if (inum == nums[i - 1]) continue
+    let right = nums.length - 1
+    let cur = nums[i]
+    if (cur > 0) return fin
+    if (cur == nums[i - 1]) continue
     while (left < right) {
-      let l = nums[left]
-      let r = nums[right]
-      let sum = inum + l + r
-      if (sum > 0) {
-        right--
-      } else if (sum < 0) {
+      if (nums[left] + nums[right] + cur < 0) {
         left++
+      } else if (nums[left] + nums[right] + cur > 0) {
+        right--
       } else {
-        res.push([inum, l, r])
+        fin.push([nums[left], nums[right], cur])
         while (left < right && nums[left] == nums[left + 1]) {
           left++
         }
@@ -47,5 +42,8 @@ var threeSum = function (nums) {
       }
     }
   }
-  return res
+  return fin
 }
+
+// test
+console.log(threeSum([-1, 0, 1, 2, -1, -4])) // [[-1,-1,2],[-1,0,1]]
