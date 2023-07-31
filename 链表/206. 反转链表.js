@@ -16,17 +16,25 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function (head) {
-  if (head == null || head.next == null) return head
-  let pre = null
-  let cur = head
-  let temp = null
 
-  while (cur !== null) {
-    temp = cur?.next
-    cur.next = pre
-    pre = cur
-    cur = temp
+// 迭代
+var reverseList = function (head) {
+  let next = null
+  let prev = null
+
+  while (head !== null) {
+    next = head.next
+    head.next = prev
+    prev = head
+    head = next
   }
-  return pre
+  return prev
+}
+
+// 递归
+var reverseList1 = function (head, prev = null) {
+  if (head == null) return prev
+  let next = head.next
+  head.next = prev
+  return reverseList1(next, head)
 }

@@ -25,3 +25,5 @@ console.log(lengthOfLongestSubstring('aab')) // 2
 console.log(lengthOfLongestSubstring('dvdf')) // 3
 console.log(lengthOfLongestSubstring('abcabcbb')) // 3
 console.log(lengthOfLongestSubstring('aabaab!bb')) // 3
+
+// 思路: 维护一个栈 遇到重复字符就移除之前在栈中相同的字符
