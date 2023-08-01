@@ -1,36 +1,33 @@
-// <a href="https://leetcode.cn/problems/valid-parentheses/description/">
-//   20. 有效的括号
-// </a>
-// <div>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。</div>
-// <div><code>输入：s = "()[]{}"
-//   </code></div>
-// <div><code>输出：true</code></div>
+// 20. 有效的括号 https://leetcode.cn/problems/valid-parentheses/description/
+
+// 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效
+// 输入：s = "()[]{}"
+// 输出：true
 
 /**
  * @param {string} s
  * @return {boolean}
  */
 var isValid = function (s) {
-  let m = {
+  let obj = {
     '[': ']',
-    '(': ')',
-    '{': '}'
+    '{': '}',
+    '(': ')'
   }
-  let arr = []
+
+  let stack = []
   for (let i of s) {
-    if (Object.keys(m).includes(i)) {
-      arr.push(m[i])
+    if (i == '[' || i == '(' || i == '{') {
+      stack.push(i)
     } else {
-      let item = arr.pop()
-      if (item !== i) {
-        return false 
+      let temp = stack.pop()
+      if (i != obj[temp]) {
+        return false
       }
     }
   }
-  if (arr.length) {
-    return false
-  }
-  return true
+  return stack.length == 0
 }
 
 console.log(isValid('()[]{[]}'))
+console.log(isValid('('))
