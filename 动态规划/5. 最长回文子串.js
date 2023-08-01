@@ -1,12 +1,10 @@
-// <a href="https://leetcode.cn/problems/longest-palindromic-substring/description/">
-//   5. 最长回文子串
-// </a>
-// <div>给你一个字符串 s，找到 s 中最长的回文子串。
+// 5. 最长回文子串 "https://leetcode.cn/problems/longest-palindromic-substring/description
 
-//   如果字符串的反序与原始字符串相同，则该字符串称为回文字符串</div>
-// <div><code>输入：s = "babad"</code></div>
-// <div><code>输出："bab"</code></div>
-// <div><code>解释："aba" 同样是符合题意的答案。</code></div>
+// 给你一个字符串 s，找到 s 中最长的回文子串。
+// 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串
+// 输入：s = "babad"
+// 输出："bab"
+// 解释："aba" 同样是符合题意的答案
 
 /**
  * @param {string} s
@@ -42,4 +40,24 @@ var longestPalindrome = function (s) {
   }
   // console.log(left,right)
   return s.slice(left, right + 1)
+}
+
+// 中心扩散法
+var longestPalindrome = function (s) {
+  let res = ''
+  for (let i = 0; i < s.length; i++) {
+    getStr(i, i)
+    getStr(i, i + 1)
+  }
+
+  function getStr(m, n) {
+    while (m >= 0 && n < s.length && s[m] == s[n]) {
+      m--
+      n++
+    }
+    if (n - m - 1 > res.length) {
+      res = s.substring(m + 1, n)
+    }
+  }
+  return res
 }
