@@ -18,15 +18,34 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+// 递归
 var inorderTraversal = function (root) {
-  if (root == null) return []
-  let a = []
+  let res = []
   mid(root)
+  return res
 
-  function mid(node) {
-    if (node?.left) mid(node.left)
-    a.push(node?.val)
-    if (node?.right) mid(node.right)
+  function mid(root) {
+    if (root == null) return
+    mid(root.left)
+    res.push(root.val)
+    mid(root.right)
   }
-  return a
+}
+
+// 迭代解法
+var inorderTraversal1 = function (root) {
+  let res = []
+  let stack = []
+  let cur = root
+  while (cur != null || stack.length > 0) {
+    if (cur != null) {
+      stack.push(cur)
+      cur = cur.left
+    } else {
+      let node = stack.pop()
+      res.push(node.val)
+      cur = node.right
+    }
+  }
+  return res
 }
