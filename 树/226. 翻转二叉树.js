@@ -1,10 +1,7 @@
-// <a href="https://leetcode.cn/problems/invert-binary-tree/solutions/415507/shou-hua-tu-jie-san-chong-xie-fa-di-gui-liang-chon/">
-//   226. 翻转二叉树
-// </a>
-// <div>给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。</div>
-// <div><code></code></div>
-// <div><code></code></div>
-// <div><code></code></div>
+// https://leetcode.cn/problems/invert-binary-tree/solutions/415507/shou-hua-tu-jie-san-chong-xie-fa-di-gui-liang-chon
+// 226. 翻转二叉树
+
+// 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点
 
 /**
  * Definition for a binary tree node.
@@ -19,13 +16,16 @@
  * @return {TreeNode}
  */
 var invertTree = function (root) {
-  return ft(root)
+  let cur = root
+  fan(cur)
+  return root
 
-  function ft(node) {
-    if (!node) return null
-    let temp = node.left
-    node.left = ft(node.right)
-    node.right = ft(temp)
-    return node
+  function fan(root) {
+    if (root?.left == null && root?.right == null) return root
+    let left = fan(root.right)
+    let right = fan(root.left)
+    root.left = left
+    root.right = right
+    return root
   }
 }
