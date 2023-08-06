@@ -1,5 +1,4 @@
 const _completeDeepClone = (obj, map = new Map()) => {
-  // 补全代码
   if (obj instanceof Date) return new Date(obj)
   if (obj instanceof RegExp) return new RegExp(obj)
   if (obj instanceof Error) return new Error(obj)
@@ -19,9 +18,9 @@ const _completeDeepClone = (obj, map = new Map()) => {
       }
     }
   }
-
   return newObject
 }
+
 
 // test
 function test() {

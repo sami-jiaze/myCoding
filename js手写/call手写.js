@@ -1,10 +1,7 @@
 Function.prototype._call = function (context, ...args) {
-  console.log(args)
   context = Object(context) || window
   const fn = Symbol('fn')
-  // console.log("context", context);
   context[fn] = this
-  // console.log(this);
   const result = context[fn](args)
   delete context[fn]
   return result

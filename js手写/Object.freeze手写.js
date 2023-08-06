@@ -1,24 +1,16 @@
 function freeze(obj) {
-  // 判断参数是否为对象
-  if (typeof obj === 'object' && obj !== null) {
-    // 获取对象的所有属性
-    const props = Object.getOwnPropertyNames(obj)
-    console.log(props)
-    // 遍历所有属性，使其不可修改
-    // for (let prop in obj) {
-    for (let prop of props) {
-      const type = Object.prototype.toString.call(obj[prop])
-      if (type === '[Object object]' || type === '[Object array]') {
-        _objectFreeze(obj[prop])
-      }
-      // 如果属性是可修改的，将其变为不可修改
-      Object.defineProperty(obj, prop, {
+  for (let key in obj) {
+    let type = Object.prototype.toString.call(obj[key])
+    if (type == '[Object object]' || type == '[Object array]') {
+      freeze(obj[key])
+    }
+    else if (obj.hasOwnProperty(key)) {
+      Object.defineProperty(obj, key, {
         writable: false
       })
     }
   }
   Object.seal(obj)
-  // 返回被冻结的对象
   return obj
 }
 
