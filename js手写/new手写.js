@@ -1,7 +1,7 @@
 function myNew(target, ...props) {
   let obj = Object.create(target.prototype)
-  let res = target.call(obj, ...props)
-  return typeof res === 'object' ? res : obj
+  target.apply(obj, props)
+  return obj
 }
 
 // test
