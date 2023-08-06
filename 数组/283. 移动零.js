@@ -11,45 +11,22 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-// 优雅一点
 var moveZeroes = function (nums) {
-  if (nums.length <= 1) return nums
-  let fast = 0
-  let slow1 = 0
-  // 双指针
-  for (fast; fast < nums.length; fast++) {
-    if (nums[fast] !== 0) {
-      let temp = nums[fast]
-      nums[slow1] = temp
-      slow1++
+  let left = 0
+  let right = 0
+  for(let i = 0; i < nums.length;i++){
+    if(nums[right]!=0){
+      nums[left] = nums[right]
+      left++
     }
+    right++
   }
-  // 把剩下的全置为零
-  while (slow1 <= nums.length - 1) {
-    nums[slow1] = 0
-    slow1++
+  for(let i = left;i<nums.length;i++){
+    nums[i] = 0
   }
+  
   return nums
 }
 
-var moveZeroes = function (nums) {
-  if (nums.length <= 1) return nums
-  let fast = 1
-  let slow1 = 0
-  let num = 0
-  for (fast; fast < nums.length; fast++) {
-    if (nums[slow1] !== 0) slow1++
-    if (nums[fast] !== 0 && nums[slow1] == 0) {
-      nums[slow1] = nums[fast]
-      slow1++
-      nums[fast] = 0
-      num++
-    }
-  }
-  while (num == -1) {
-    nums[slow1] = 0
-    slow1++
-    num--
-  }
-  return nums
-}
+// test
+console.log(moveZeroes([0, 1, 0, 3, 12]))
