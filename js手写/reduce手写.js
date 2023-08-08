@@ -1,11 +1,10 @@
 Array.prototype.reduce = function (callback, initialValue) {
-  let accumulator = initialValue === undefined ? undefined : initialValue
+  let accumulator = initialValue == undefined ? undefined : initialValue;
+  let that = this
 
-  for (let i = 0; i < this.length; i++) {
+  for (let i = 0; i < that.length; i++) {
     if (accumulator !== undefined) {
-      accumulator = callback.call(undefined, accumulator, this[i], i, this)
-    } else {
-      accumulator = this[i]
+      accumulator = callback(accumulator, that[i], i, that)
     }
   }
 
