@@ -1,10 +1,8 @@
-// <a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/">
-//   19. 删除链表的倒数第 N 个结点
-// </a>
-// <div>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</div>
-// <div><code>输入：head = [1,2,3,4,5], n = 2</code></div>
-// <div><code>输出：[1,2,3,5]</code></div>
-// <div><code></code></div>
+// 19. 删除链表的倒数第 N 个结点 https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description
+
+// 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点
+// 输入：head = [1,2,3,4,5], n = 2
+// 输出：[1,2,3,5]
 
 /**
  * Definition for singly-linked list.
@@ -18,27 +16,45 @@
  * @param {number} n
  * @return {ListNode}
  */
+// 使用数组
 var removeNthFromEnd = function (head, n) {
-  let len = 0
-  let cur = head
-  let fin = head
-  while (cur) {
-    len++
-    cur = cur.next
+  let temp = head
+  let arr = []
+  while (temp != null) {
+    arr.push(temp)
+    temp = temp.next
   }
-  let del = len - n - 1
-  if (del == -1) return head.next
-
-  while (del > 0) {
-    fin = fin?.next
-    del--
+  let del = arr[arr.length - n]
+  let pre = head
+  if (pre == del) {
+    return head.next
   }
-  let delItem = fin.next
-  if (!delItem || !delItem.next) {
-    fin.next = null
-  } else {
-    fin.next = fin?.next?.next
+  let next = head.next
+  while (next != null) {
+    if (next == del) {
+      pre.next = next.next
+    }
+    pre = pre.next
+    next = next.next
   }
-
   return head
+}
+
+// 快慢指针
+var removeNthFromEnd = function (head, n) {
+  let xu = new ListNode()
+  xu.next = head
+  let slow = xu
+  let fast = xu
+  while (n > 0) {
+    fast = fast.next
+    n--
+  }
+
+  while (fast?.next != null) {
+    fast = fast.next
+    slow = slow.next
+  }
+  slow.next = slow.next.next
+  return xu.next
 }
