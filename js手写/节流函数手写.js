@@ -9,6 +9,19 @@ function throttle(fn, wait) {
   }
 }
 
+// demo
+function demo(fn, wait) {
+  let last = 0
+  return function (...args) {
+    let now = +new Date()    
+    if(now - last>wait){
+      last = now
+      fn.apply(this, args)
+    }
+  }  
+}
+
+
 // test
 setInterval(
   throttle(() => {

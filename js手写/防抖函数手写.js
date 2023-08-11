@@ -9,13 +9,12 @@ function debounce(fn, delay) {
 }
 
 // demo
-function demo(fn,delay) {
+function demo(fn, delay) {
   let timer = null
   return function (...args) {
-    if(timer) clearTimeout(timer)
+    if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       fn.apply(this, args)
-    }, delay);    
+    }, delay)
   }
 }
-

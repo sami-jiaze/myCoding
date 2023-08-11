@@ -9,7 +9,9 @@ class Observerd {
   }
   setState(state) {
     this.state = state
-    this.observers.forEach(observer => observer.update(this))
+    this.observers.forEach(observer => {
+      observer.update(this)
+    })
   }
 }
 class Observer {
@@ -20,15 +22,12 @@ class Observer {
 }
 
 // test
-function test() {
-  let state = ''
-  window.console.log = function (event) {
-    state = event
-  }
-  const obd = new Observerd('g')
-  const ob = new Observer()
-  obd.setObserver(ob)
-  obd.setState('跑步')
-  const judge = state === 'g正在跑步'
-  return judge
-}
+const sub = new Observerd('Rio')
+
+const user1 = new Observer()
+const user2 = new Observer()
+
+sub.setObserver(user1)
+sub.setObserver(user2)
+
+sub.setState('run')
