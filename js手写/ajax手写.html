@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let url = 'https://console-mock.apipost.cn/mock/9e019b94-bafb-4669-901f-17da65936b45/home/plus'
+
+    let xml = new XMLHttpRequest()
+    xml.open('GET', url, true)
+    xml.send(null)
+    xml.onreadystatechange = () => {
+      // console.log(xml);
+      if (xml.readyState == 4) {
+        if (xml.status == 200) {
+          console.log(xml.responseText)
+        } else {
+          console.log("失败");
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

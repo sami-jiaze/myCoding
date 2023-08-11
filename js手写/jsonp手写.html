@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function jsonp(url, params, cb) {
+      const cbName = 'jsonp' + Date.now()
+      const queryString = Object.keys(params)
+        .map(key => {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+        })
+        .join('&') // [ 'user=admin', 'age=30', 'num=10' ]
+
+      const sc = document.createElement('script')
+      sc.src = url + '?' + queryString + '&cb=' + cbName
+
+      window[cbName] = function (data) {
+        cb(data)
+        document.head.removeChild(sc)
+        delete window[cbName]
+      }
+
+      document.head.appendChild(sc)
+    }
+
+    jsonp('https://console-mock.apipost.cn/mock/9e019b94-bafb-4669-901f-17da65936b45/home/plus', { user: 'admin', age: 30, num: 10 }, function (data) {
+      console.log(data)
+    })
+
+  </script>
+</body>
+
+</html>
