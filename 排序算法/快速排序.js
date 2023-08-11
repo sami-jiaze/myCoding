@@ -14,8 +14,8 @@ function quickSort(arr) {
   partition(0, arr.length - 1)
 
   function partition(left, right) {
-    if(left >= right) return
-    
+    if (left >= right) return
+
     // 找基准
     const p = arr[right]
     // 双指针交换 形成左右两个数组
@@ -52,4 +52,21 @@ function swap(arr, i, j) {
   arr[j] = temp
 }
 
+function quickSort2(arr) {
+  if (arr.length == 0) return []
+  let pindex = Math.floor(arr.length / 2)
+  let p = arr.splice(pindex, 1)
+  let l = []
+  let r = []
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < p) {
+      l.push(arr[i])
+    } else {
+      r.push(arr[i])
+    }
+  }
+  return quickSort2(l).concat(p, quickSort2(r))
+}
+
 console.log(quickSort(arr))
+console.log(quickSort2(arr))

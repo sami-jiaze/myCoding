@@ -1,9 +1,9 @@
 Function.prototype._call = function (context, ...args) {
-  context = Object(context) || window
+  let temp = Object(context) || window
   const fn = Symbol('fn')
-  context[fn] = this
-  const result = context[fn](args)
-  delete context[fn]
+  temp[fn] = this
+  const result = temp[fn](args)
+  delete temp[fn]
   return result
 }
 
