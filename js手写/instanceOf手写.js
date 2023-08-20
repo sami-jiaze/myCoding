@@ -3,12 +3,12 @@ function _instanceOf(a, b) {
   let ap = Object.getPrototypeOf(a)
   while (ap!=null) {
     if(ap == b.prototype) return true
-    a = Object.getPrototypeOf(a)
+    ap = Object.getPrototypeOf(ap)
   }
   return false
 }
 
 console.log(_instanceOf(null, Array)) // false
-console.log(_instanceOf([], Array)) // true
+console.log(_instanceOf([], Object)) // true
 console.log(_instanceOf('', Array)) // false
 console.log(_instanceOf({}, Object)) // true
