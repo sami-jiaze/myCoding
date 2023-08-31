@@ -1,33 +1,32 @@
-class Observerd {
-  constructor(name) {
-    this.name = name
-    this.state = '走路'
-    this.observers = []
+class observed {
+  constructor() {
+    this.list = []
   }
-  setObserver(observer) {
-    this.observers.push(observer)
+  add(user) {
+    this.list.push(user)
   }
-  setState(state) {
-    this.state = state
-    this.observers.forEach(observer => {
-      observer.update(this)
+  notify(msg) {
+    this.list.forEach(user => {
+      user.listen(msg)
     })
   }
 }
-class Observer {
-  constructor() {}
-  update(observerd) {
-    console.log(observerd.name + '正在' + observerd.state)
+
+class observer {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+  listen(msg) {
+    console.log(this.name + ' ' + msg)
   }
 }
 
-// test
-const sub = new Observerd('Rio')
+let a = new observed()
+let user1 = new observer('user1', 20)
+let user2 = new observer('user2', 25)
 
-const user1 = new Observer()
-const user2 = new Observer()
+a.add(user1)
+a.add(user2)
 
-sub.setObserver(user1)
-sub.setObserver(user2)
-
-sub.setState('run')
+a.notify('new msg')

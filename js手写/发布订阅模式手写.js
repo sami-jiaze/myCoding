@@ -1,40 +1,46 @@
-class EventEmitter {
+class Eventbus {
   constructor() {
-    this.list = {}
+    this.map = new Map()
   }
-  on(event, fn) {
-    if (!this.list[event]) {
-      this.list[event] = []
+  on(str, fn) {
+    let set = this.map.get(str)
+    if (!set) {
+      this.map.set(str, (set = []))
     }
-    this.list[event].push(fn)
+    set.push(fn)
   }
-
-  emit(event, data) {
-    if (this.list[event]) {
-      this.list[event].forEach(callback => callback(data))
-    }
+  emit(str) {
+    let set = this.map.get(str)
+    if (!set) return
+    set.forEach(fn => {
+      fn()
+    })
   }
-
-  off(name, fn) {
-    if (this.list[name]) {
-      let index = this.list[name].indexOf(fn)
-      this.list[name].splice(index, 1)
-    }
+  del(str, fn) {
+    let srr = this.map.get(str)
+    srr.splice(str.indexOf(fn), 1)
   }
 }
 
-// test
-let sign1 = 0
-let sign2 = 0
-const emitter = new EventEmitter()
-emitter.on('add', function () {
-  sign1++
+// 测试
+let num1 = 0
+let num2 = 0
+let eventbus = new Eventbus()
+eventbus.on('add1', function () {
+  num1++
 })
-emitter.emit('add')
-emitter.on('add', function () {
-  sign2++
+eventbus.on('add1', function () {
+  num1 = num1 + 2
 })
-emitter.emit('add')
-const judge = sign1 === 2 && sign2 === 1
-
-console.log('s1:', sign1, 's2:', sign2)
+eventbus.on('add2', function () {
+  num1++
+  num2++
+})
+eventbus.emit('add1')
+eventbus.emit('add1')
+eventbus.emit('add2')
+eventbus.del('add1', function () {
+  num1 = num1 + 2
+})
+eventbus.emit('add1')
+console.log(num1, num2)

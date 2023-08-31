@@ -33,20 +33,22 @@ var mergeTwoLists = function (list1, list2) {
 
 // 迭代法 只要有一个结束 就可以停下来了
 var mergeTwoLists = function (l1, l2) {
-  let fin = new ListNode(0)
-  let temp = fin
+  let res = new ListNode()
+  let fin = res
   while (l1 !== null && l2 !== null) {
-    let n1 = l1?.val ? l1?.val : null
-    let n2 = l2?.val ? l2?.val : null
-    if (n1 >= n2) {
-      temp.next = l2
+    let v1 = l1.val
+    let v2 = l2.val
+    if (v1 > v2) {
+      let temp = new ListNode(v2)
+      res.next = temp
       l2 = l2.next
     } else {
-      temp.next = l1
-      l1 = l1?.next
+      let temp = new ListNode(v1)
+      res.next = temp
+      l1 = l1.next
     }
-    temp = temp.next
+    res = res.next
   }
-  temp.next = l1 === null ? l2 : l1
+  res.next = l1 === null ? l2 : l1
   return fin.next
 }
