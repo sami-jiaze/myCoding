@@ -26,7 +26,25 @@ var maxSubArray = function (nums) {
   return max
 }
 
+function maxSubArray2(arr) {
+  let max = arr[0]
+  let temp = 0
+  for (let i = 0; i < arr.length; i++) {
+    temp = temp + arr[i]
+    if(temp > max) {
+      max = temp
+    }
+    if(temp<0){
+      temp = 0
+    }
+  }
+  return max
+}
+
 // test
 // console.log(maxSubArray([-2, -1])) //-1
 // console.log(maxSubArray([-2, 1])) //1
 console.log(maxSubArray([-3, -2, 0, -1])) // 0
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])) // 6
+console.log(maxSubArray2([-3, -2, 0, -1])) // 0
+console.log(maxSubArray2([-2, 1, -3, 4, -1, 2, 1, -5, 4])) // 6

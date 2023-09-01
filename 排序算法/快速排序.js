@@ -53,16 +53,17 @@ function swap(arr, i, j) {
 }
 
 function quickSort2(arr) {
-  if (arr.length == 0) return []
-  let pindex = Math.floor(arr.length / 2)
-  let p = arr.splice(pindex, 1)
+  if (arr.length == 0) return arr
+  let half = Math.floor(arr.length / 2)
+  let p = arr.splice(half, 1)
   let l = []
   let r = []
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < p) {
-      l.push(arr[i])
+
+  for (let i of arr) {
+    if (i < p) {
+      l.push(i)
     } else {
-      r.push(arr[i])
+      r.push(i)
     }
   }
   return quickSort2(l).concat(p, quickSort2(r))

@@ -42,4 +42,36 @@ function mergeSort(arr) {
   return res
 }
 
+function mergeSort2(arr) {
+  if (arr.length <= 1) return arr
+  let mid = Math.floor(arr.length / 2)
+  let left = arr.slice(0, mid)
+  let right = arr.slice(mid)
+
+  let newleft = mergeSort2(left)
+  let newright = mergeSort2(right)
+
+  let res = []
+  let l = 0
+  let r = 0
+  while (l < newleft.length && r < newright.length) {
+    if (newleft[l] < newright[r]) {
+      res.push(newleft[l])
+      l++
+    } else {
+      res.push(newright[r])
+      r++
+    }
+  }
+
+  if (l < newleft.length) {
+    res.push(...newleft.slice(l))
+  }
+  if (r < newright.length) {
+    res.push(...newright.slice(r))
+  }
+  return res
+}
+
 console.log(mergeSort(arr))
+console.log(mergeSort2(arr))
