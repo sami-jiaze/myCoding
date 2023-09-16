@@ -13,7 +13,6 @@
 
     let xml = new XMLHttpRequest()
     xml.open('GET', url, true)
-    xml.send(null)
     xml.onreadystatechange = () => {
       // console.log(xml);
       if (xml.readyState == 4) {
@@ -24,6 +23,29 @@
         }
       }
     }
+    xml.send(null)
+
+    // Promise封装xml请求
+    function ajax(data, url, method) {
+      return new Promise((res, rej) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url)
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              res(xhr.responseText)
+            } else {
+              rej("err")
+            }
+          }
+        }
+        xhr.send(data)
+      })
+    }
+
+    ajax('', url, 'GET').then((res)=>{
+      console.log(res);
+    })
   </script>
 </body>
 
